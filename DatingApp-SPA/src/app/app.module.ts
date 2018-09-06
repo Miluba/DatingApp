@@ -8,13 +8,12 @@ import { NavComponent } from './components/nav/nav.component';
 import { AuthService } from './services/auth.service';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ErrorInterceptorProvider } from './services/error.interceptor';
 
 @NgModule({
   declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent],
   imports: [BrowserModule, HttpClientModule, FormsModule],
-  providers: [
-    AuthService
-  ],
+  providers: [AuthService, ErrorInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

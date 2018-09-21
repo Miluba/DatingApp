@@ -24,6 +24,9 @@ import { TabsModule, BsDropdownModule } from 'ngx-bootstrap';
 import { MemberDetailResolver } from './resolvers/member-detail-resolver';
 import { MemberListResolver } from './resolvers/member-list-resolver';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { MemberEditComponent } from './components/members/member-edit/member-edit.component';
+import { MemberEditResolver } from './resolvers/member-edit-resolver';
+import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 
 
 export const tokenGetter = () => {
@@ -40,7 +43,8 @@ export const tokenGetter = () => {
     MessagesComponent,
     MemberListComponent,
     MemberCardComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -63,9 +67,11 @@ export const tokenGetter = () => {
     ErrorInterceptorProvider,
     AlertifyService,
     AuthGuard,
+    PreventUnsavedChanges,
     UserService,
     MemberDetailResolver,
-    MemberListResolver
+    MemberListResolver,
+    MemberEditResolver
   ],
   bootstrap: [AppComponent]
 })

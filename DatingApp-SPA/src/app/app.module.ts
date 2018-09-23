@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './components/app/app.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -20,7 +20,7 @@ import { UserService } from './services/user.service';
 import { MemberCardComponent } from './components/members/member-card/member-card.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MemberDetailComponent } from './components/members/member-detail/member-detail.component';
-import { TabsModule, BsDropdownModule } from 'ngx-bootstrap';
+import { TabsModule, BsDropdownModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { MemberDetailResolver } from './resolvers/member-detail-resolver';
 import { MemberListResolver } from './resolvers/member-list-resolver';
 import { NgxGalleryModule } from 'ngx-gallery';
@@ -51,9 +51,11 @@ export const tokenGetter = () => {
   ],
   imports: [
     BrowserModule,
+    BsDatepickerModule.forRoot(),
     HttpClientModule,
     FormsModule,
     NgxGalleryModule,
+    ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({

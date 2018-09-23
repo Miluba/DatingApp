@@ -60,6 +60,7 @@ namespace DatingApp.API
                 }
             );
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+            services.AddScoped<LogUserActivity>();
 
         }
 

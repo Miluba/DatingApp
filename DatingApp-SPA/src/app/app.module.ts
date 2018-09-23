@@ -20,7 +20,11 @@ import { UserService } from './services/user.service';
 import { MemberCardComponent } from './components/members/member-card/member-card.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MemberDetailComponent } from './components/members/member-detail/member-detail.component';
-import { TabsModule, BsDropdownModule, BsDatepickerModule } from 'ngx-bootstrap';
+import {
+  TabsModule,
+  BsDropdownModule,
+  BsDatepickerModule
+} from 'ngx-bootstrap';
 import { MemberDetailResolver } from './resolvers/member-detail-resolver';
 import { MemberListResolver } from './resolvers/member-list-resolver';
 import { NgxGalleryModule } from 'ngx-gallery';
@@ -29,7 +33,7 @@ import { MemberEditResolver } from './resolvers/member-edit-resolver';
 import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './components/members/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
-
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 export const tokenGetter = () => {
   return localStorage.getItem('token');
@@ -47,7 +51,8 @@ export const tokenGetter = () => {
     MemberCardComponent,
     MemberDetailComponent,
     MemberEditComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,

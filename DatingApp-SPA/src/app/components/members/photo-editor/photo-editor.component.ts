@@ -58,7 +58,6 @@ export class PhotoEditorComponent implements OnInit {
         const photo = {
           ...res
         };
-        console.log(photo);
         this.photos.push(photo);
         if (photo.isMain) {
           this.currentMainPhoto = photo;

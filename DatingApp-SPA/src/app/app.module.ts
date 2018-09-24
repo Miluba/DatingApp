@@ -23,7 +23,9 @@ import { MemberDetailComponent } from './components/members/member-detail/member
 import {
   TabsModule,
   BsDropdownModule,
-  BsDatepickerModule
+  BsDatepickerModule,
+  PaginationModule,
+  ButtonsModule
 } from 'ngx-bootstrap';
 import { MemberDetailResolver } from './resolvers/member-detail-resolver';
 import { MemberListResolver } from './resolvers/member-list-resolver';
@@ -61,6 +63,8 @@ export const tokenGetter = () => {
     FormsModule,
     NgxGalleryModule,
     ReactiveFormsModule,
+    ButtonsModule.forRoot(),
+    PaginationModule.forRoot(),
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({

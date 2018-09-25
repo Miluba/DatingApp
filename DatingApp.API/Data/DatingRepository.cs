@@ -27,6 +27,12 @@ namespace DatingApp.API.Data
             context.Remove(entity);
         }
 
+        public async Task<Like> GetLike(int userId, int recipientId)
+        {
+            return await context.Likes.FirstOrDefaultAsync(user => user.LikerId == userId && user.LikeeId == recipientId);
+
+        }
+
         public async Task<Photo> GetMainPhotoForUser(int userId)
         {
             return await context.Photos.Where(u => u.UserId == userId).FirstOrDefaultAsync(p => p.IsMain);
@@ -40,15 +46,38 @@ namespace DatingApp.API.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await context.Users
+            .Include(p => p.Photos)
+            .Include(l => l.Likers)
+            .Include(l => l.Likees)
+            .FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
 
         public async Task<PageList<User>> GetUsers(UserParams userParams)
         {
-            var users = context.Users.Include(p => p.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
+            var users = context.Users
+            .Include(p => p.Photos)
+            .OrderByDescending(u => u.LastActive)
+            .AsQueryable();
+
+            var likes = context.Likes.AsQueryable();
+
             users = users.Where(user => user.Id != userParams.UserId);
             users = users.Where(user => user.Gender == userParams.Gender);
+            
+            if (userParams.Likers)
+            {
+                likes = likes.Where(like => like.LikeeId==userParams.UserId);
+                users = likes.Select(like => like.Liker);
+            }
+
+            if (userParams.Likees)
+            {
+                likes = likes.Where(like => like.LikerId==userParams.UserId);
+                users = likes.Select(like => like.Likee);
+            }
+
             if (userParams.MinAge != 18 || userParams.MaxAge != 99)
             {
                 var minDoB = DateTime.Today.AddYears(-userParams.MaxAge - 1);
